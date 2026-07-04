@@ -140,6 +140,24 @@ section{margin-top:64px}
 .tool-card.cc .t-stripe{background:#5d4fd3}
 .tool-card.cx .t-stripe{background:#0e8a72}
 
+/* OS toggle (segmented) */
+.os-toggle-label{
+  font-size:.82rem;font-weight:700;color:var(--ink-soft);
+  margin-top:30px;letter-spacing:.08em;
+}
+.os-toggle{
+  display:flex;margin-top:10px;max-width:480px;
+  border-radius:999px;overflow:hidden;border:2px solid var(--ink);
+  background:#fff;
+}
+.os-toggle a{
+  flex:1;text-align:center;padding:14px 10px;text-decoration:none;
+  font-family:'Zen Maru Gothic',sans-serif;font-weight:700;font-size:.95rem;
+  color:var(--ink-soft);transition:all .15s;
+}
+.os-toggle a.active{background:var(--ink);color:#fff}
+.os-toggle a:not(.active):hover{background:var(--paper-2);color:var(--ink)}
+
 /* OS switch banner */
 .os-switch{
   display:flex;align-items:center;gap:14px;flex-wrap:wrap;

@@ -8,234 +8,18 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-<style>
-:root{
-  --paper:#faf7f1;
-  --paper-2:#f3eee4;
-  --ink:#26203a;
-  --ink-soft:#5d5675;
-  --violet:#5d4fd3;
-  --violet-deep:#463aa8;
-  --violet-soft:#eceafb;
-  --coral:#e5673f;
-  --coral-soft:#fdeee7;
-  --green:#3d8f5f;
-  --green-soft:#e7f4ec;
-  --line:#e2dccd;
-  --code-bg:#2a2440;
-  --code-ink:#e8e4f8;
-  --radius:18px;
-  font-size:16px;
-}
-*{margin:0;padding:0;box-sizing:border-box}
-html{scroll-behavior:smooth;scroll-padding-top:84px}
-body{
-  font-family:'Zen Kaku Gothic New',sans-serif;
-  background:var(--paper);
-  color:var(--ink);
-  line-height:1.9;
-  background-image:radial-gradient(var(--line) 1px, transparent 1px);
-  background-size:28px 28px;
-}
-h1,h2,h3,.step-num{font-family:'Zen Maru Gothic',sans-serif}
-code,pre,.mono{font-family:'DM Mono',monospace}
-
-/* ---- header ---- */
-.topbar{
-  position:sticky;top:0;z-index:50;
-  background:rgba(250,247,241,.92);backdrop-filter:blur(8px);
-  border-bottom:1px solid var(--line);
-}
-.topbar-in{max-width:920px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
-.logo{font-family:'Zen Maru Gothic',sans-serif;font-weight:900;font-size:1rem;letter-spacing:.02em}
-.logo .brain{color:var(--violet)}
-.topnav{display:flex;gap:4px;margin-left:auto;flex-wrap:wrap}
-.topnav a{
-  font-size:.78rem;color:var(--ink-soft);text-decoration:none;
-  padding:5px 10px;border-radius:999px;font-weight:500;
-}
-.topnav a:hover{background:var(--violet-soft);color:var(--violet-deep)}
-
-/* ---- hero ---- */
-.hero{max-width:920px;margin:0 auto;padding:72px 20px 40px;position:relative}
-.hero-badge{
-  display:inline-block;background:var(--ink);color:var(--paper);
-  font-size:.75rem;font-weight:700;letter-spacing:.14em;
-  padding:6px 16px;border-radius:999px;margin-bottom:22px;
-}
-.hero h1{
-  font-size:clamp(1.9rem,5.4vw,3.2rem);font-weight:900;line-height:1.35;
-  letter-spacing:.01em;
-}
-.hero h1 .hl{
-  color:var(--violet);
-  text-decoration:underline;
-  text-decoration-color:rgba(93,79,211,.25);
-  text-decoration-thickness:10px;
-  text-underline-offset:4px;
-}
-.hero p.lead{margin-top:22px;font-size:1.02rem;color:var(--ink-soft);max-width:600px}
-.hero .meta{margin-top:26px;display:flex;gap:10px;flex-wrap:wrap}
-.chip{
-  font-size:.78rem;font-weight:700;padding:7px 14px;border-radius:999px;
-  border:1.5px solid var(--line);background:#fff;color:var(--ink-soft);
-}
-.chip.violet{border-color:var(--violet);color:var(--violet-deep);background:var(--violet-soft)}
-
-/* ---- sections ---- */
-main{max-width:920px;margin:0 auto;padding:0 20px 100px}
-section{margin-top:64px}
-.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:26px}
-.step-num{
-  flex-shrink:0;
-  font-size:2.6rem;font-weight:900;color:transparent;
-  -webkit-text-stroke:2px var(--violet);
-  line-height:1;
-}
-.sec-head h2{font-size:clamp(1.3rem,3.4vw,1.7rem);font-weight:900;line-height:1.5}
-.card{
-  background:#fff;border:1.5px solid var(--line);border-radius:var(--radius);
-  padding:28px;margin-bottom:18px;
-  box-shadow:0 2px 0 var(--line);
-}
-.card h3{font-size:1.05rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
-.card p{color:var(--ink-soft);font-size:.95rem}
-.card p+p{margin-top:10px}
-.card strong{color:var(--ink)}
-.card ul,.card ol{padding-left:1.4em;color:var(--ink-soft);font-size:.95rem}
-.card li{margin:6px 0}
-.card li::marker{color:var(--violet);font-weight:700}
-
-/* before / after */
-.ba{display:grid;grid-template-columns:1fr 1fr;gap:18px}
-@media(max-width:640px){.ba{grid-template-columns:1fr}}
-.ba .card{margin:0}
-.ba .tag{font-size:.72rem;font-weight:700;letter-spacing:.12em;padding:4px 12px;border-radius:999px;display:inline-block;margin-bottom:14px}
-.ba .before .tag{background:var(--coral-soft);color:var(--coral)}
-.ba .after .tag{background:var(--green-soft);color:var(--green)}
-.ba .bubble{
-  background:var(--paper-2);border-radius:12px;padding:12px 16px;
-  font-size:.88rem;color:var(--ink-soft);margin-top:10px;position:relative;
-}
-.ba .after .bubble{background:var(--green-soft)}
-
-/* flow diagram */
-.flow{display:flex;flex-direction:column;gap:0;margin:18px 0 6px}
-.flow-item{display:flex;gap:14px;align-items:flex-start}
-.flow-dot{
-  flex-shrink:0;width:34px;height:34px;border-radius:50%;
-  background:var(--violet);color:#fff;font-weight:700;font-size:.85rem;
-  display:flex;align-items:center;justify-content:center;
-  font-family:'DM Mono',monospace;
-}
-.flow-line{width:2px;flex-grow:1;background:var(--line);margin-left:16px;min-height:14px}
-.flow-body{padding-bottom:18px;padding-top:4px}
-.flow-body b{font-size:.95rem}
-.flow-body span{display:block;font-size:.85rem;color:var(--ink-soft)}
-
-/* tabs */
-.tabs{display:flex;gap:8px;margin-bottom:-1px;position:relative;z-index:2}
-.tab-btn{
-  font-family:'Zen Maru Gothic',sans-serif;font-weight:700;font-size:.92rem;
-  padding:12px 22px;border-radius:14px 14px 0 0;cursor:pointer;
-  border:1.5px solid var(--line);border-bottom:none;
-  background:var(--paper-2);color:var(--ink-soft);
-}
-.tab-btn.active{background:var(--code-bg);color:#fff;border-color:var(--code-bg)}
-.prompt-box{
-  border-radius:0 14px 14px 14px;overflow:hidden;
-  border:1.5px solid var(--code-bg);
-  background:var(--code-bg);
-}
-.prompt-head{
-  display:flex;align-items:center;gap:10px;padding:12px 18px;
-  border-bottom:1px solid rgba(255,255,255,.12);
-}
-.prompt-head .dots{display:flex;gap:6px}
-.prompt-head .dots i{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.22)}
-.prompt-head .fname{font-size:.78rem;color:rgba(232,228,248,.6);font-family:'DM Mono',monospace}
-.copy-btn{
-  margin-left:auto;
-  font-family:'Zen Maru Gothic',sans-serif;font-weight:700;font-size:.85rem;
-  background:var(--violet);color:#fff;border:none;border-radius:999px;
-  padding:8px 20px;cursor:pointer;transition:all .15s;
-}
-.copy-btn:hover{background:var(--violet-deep);transform:translateY(-1px)}
-.copy-btn.done{background:var(--green)}
-.prompt-scroll{
-  max-height:420px;overflow:auto;padding:20px 22px;
-}
-.prompt-scroll pre{
-  font-size:.8rem;line-height:1.75;color:var(--code-ink);
-  white-space:pre-wrap;word-break:break-word;
-}
-.tab-panel{display:none}
-.tab-panel.active{display:block}
-
-/* small code */
-.inline-cmd{
-  background:var(--code-bg);border-radius:12px;padding:14px 18px;
-  display:flex;align-items:center;gap:12px;margin:12px 0;
-}
-.inline-cmd code{color:var(--code-ink);font-size:.82rem;word-break:break-all;flex-grow:1}
-.inline-cmd .copy-btn{padding:6px 14px;font-size:.78rem;flex-shrink:0}
-
-/* notes */
-.note{
-  border-radius:14px;padding:18px 22px;font-size:.9rem;margin:14px 0;
-  display:flex;gap:12px;align-items:flex-start;
-}
-.note .ico{flex-shrink:0;font-size:1.1rem;line-height:1.6}
-.note.warn{background:var(--coral-soft);color:#8a3c1e}
-.note.tip{background:var(--violet-soft);color:var(--violet-deep)}
-.note.ok{background:var(--green-soft);color:#1e5c3a}
-
-/* table */
-table{width:100%;border-collapse:collapse;font-size:.88rem;margin:12px 0}
-th,td{padding:10px 14px;text-align:left;border-bottom:1px solid var(--line)}
-th{font-size:.78rem;letter-spacing:.08em;color:var(--ink-soft);font-weight:700}
-td b{color:var(--violet-deep)}
-
-/* accordion */
-details{
-  background:#fff;border:1.5px solid var(--line);border-radius:14px;
-  margin-bottom:12px;overflow:hidden;
-}
-summary{
-  cursor:pointer;padding:18px 22px;font-weight:700;font-size:.95rem;
-  list-style:none;display:flex;align-items:center;gap:10px;
-}
-summary::before{content:"▸";color:var(--violet);transition:transform .2s;font-size:.9rem}
-details[open] summary::before{transform:rotate(90deg)}
-details .d-body{padding:0 22px 20px;font-size:.9rem;color:var(--ink-soft)}
-details .d-body code{background:var(--paper-2);padding:2px 8px;border-radius:6px;font-size:.82rem}
-
-/* footer */
-footer{border-top:1px solid var(--line);margin-top:80px}
-.footer-in{max-width:920px;margin:0 auto;padding:36px 20px;font-size:.82rem;color:var(--ink-soft);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
-
-/* toast */
-#toast{
-  position:fixed;bottom:28px;left:50%;transform:translate(-50%,80px);
-  background:var(--ink);color:var(--paper);font-weight:700;font-size:.88rem;
-  padding:12px 26px;border-radius:999px;transition:transform .25s;z-index:99;
-}
-#toast.show{transform:translate(-50%,0)}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <div class="topbar">
   <div class="topbar-in">
-    <div class="logo">🧠 AI外部記憶<span class="brain">システム</span> 導入マニュアル</div>
+    <a class="logo" href="./">🧠 AI外部記憶<span class="brain">システム</span> 導入マニュアル</a>
     <nav class="topnav">
       <a href="#what">これは何？</a>
-      <a href="#prep">準備</a>
-      <a href="#install">導入</a>
-      <a href="#check">動作確認</a>
-      <a href="#usage">使い方</a>
-      <a href="#security">注意</a>
-      <a href="#faq">FAQ</a>
+      <a href="#choose">マニュアルを選ぶ</a>
+      <a href="claude-code.html">Claude Code版</a>
+      <a href="codex.html">Codex版</a>
     </nav>
   </div>
 </div>
@@ -245,7 +29,7 @@ footer{border-top:1px solid var(--line);margin-top:80px}
   <h1>AIの「記憶喪失」を、<br><span class="hl">コピペ一発</span>で解決する。</h1>
   <p class="lead">Obsidianという無料メモアプリをAIの「外部記憶」にして、Claude CodeやCodexがセッションをまたいで記憶を引き継げるようにします。導入作業はAIが自分でやってくれるので、あなたはプロンプトを貼るだけ。</p>
   <div class="meta">
-    <span class="chip violet">所要時間 約20分</span>
+    <span class="chip accent">所要時間 約20分</span>
     <span class="chip">費用 0円</span>
     <span class="chip">対象 Mac</span>
     <span class="chip">Claude Code / Codex 対応</span>
@@ -254,7 +38,7 @@ footer{border-top:1px solid var(--line);margin-top:80px}
 
 <main>
 
-<!-- 1 -->
+<!-- what -->
 <section id="what">
   <div class="sec-head"><div class="step-num">01</div><h2>これは何？ — AIの記憶喪失問題</h2></div>
   <div class="card">
@@ -288,333 +72,39 @@ footer{border-top:1px solid var(--line);margin-top:80px}
   </div>
 </section>
 
-<!-- 2 -->
-<section id="prep">
-  <div class="sec-head"><div class="step-num">02</div><h2>事前準備 — 必要なのは2つだけ</h2></div>
-  <div class="card">
-    <ul>
-      <li><strong>Mac</strong>（Windows版は現在準備中です）</li>
-      <li><strong>Claude Code または Codex が使えること</strong>（どちらか片方でOK・両方ならさらに強力）</li>
-    </ul>
-    <p style="margin-top:14px">Obsidianのインストールは<strong>AIが自分でやってくれる</strong>ので、事前に入れておく必要はありません。</p>
+<!-- choose -->
+<section id="choose">
+  <div class="sec-head"><div class="step-num">02</div><h2>使っているツールのマニュアルを選ぶ</h2></div>
+  <div class="tool-grid">
+    <a class="tool-card cc" href="claude-code.html">
+      <div class="t-stripe"></div>
+      <div class="t-ico">🟣</div>
+      <h3>Claude Code 版</h3>
+      <p>Anthropicの「Claude Code」を使っている人はこちら。デスクトップアプリ・CLIどちらでもOK。</p>
+      <span class="t-cta">マニュアルを開く →</span>
+    </a>
+    <a class="tool-card cx" href="codex.html">
+      <div class="t-stripe"></div>
+      <div class="t-ico">🟢</div>
+      <h3>Codex 版</h3>
+      <p>OpenAIの「Codex」（デスクトップアプリ）を使っている人はこちら。</p>
+      <span class="t-cta">マニュアルを開く →</span>
+    </a>
   </div>
-  <div class="note tip"><span class="ico">💡</span><span>Claude CodeとCodexを両方使っている人は、両方に導入すると<strong>2つのAIが同じ記憶を共有</strong>します。Claude Codeで進めた作業の続きをCodexに頼む、みたいなことができるようになります。</span></div>
+  <div class="note tip"><span class="ico">💡</span><span><strong>両方使っている人へ：</strong>両方に導入すると、2つのAIが<strong>同じ記憶を共有</strong>します。Claude Codeで進めた作業の続きをCodexに頼む、みたいなことができるようになります。どちらか片方を先に終わらせてから、もう片方を導入してください。</span></div>
 </section>
 
-<!-- 3 -->
-<section id="install">
-  <div class="sec-head"><div class="step-num">03</div><h2>導入 — プロンプトをコピペするだけ</h2></div>
-  <div class="card">
-    <p>使っているツールのタブを選んで「コピーする」を押し、<strong>そのままAIに貼り付けて送信</strong>してください。あとはAIが順番に作業してくれます。途中でAIから確認や許可を求められたら、内容を見て許可してあげてください。</p>
-  </div>
-
-  <div class="tabs">
-    <button class="tab-btn active" data-tab="claude">Claude Code版</button>
-    <button class="tab-btn" data-tab="codex">Codex版</button>
-  </div>
-
-  <div class="tab-panel active" id="panel-claude">
-    <div class="prompt-box">
-      <div class="prompt-head">
-        <div class="dots"><i></i><i></i><i></i></div>
-        <span class="fname">installer-claude-code.md</span>
-        <button class="copy-btn" data-copy="prompt-claude">コピーする</button>
-      </div>
-      <div class="prompt-scroll"><pre id="prompt-claude">あなたに「外部記憶システム」を導入してもらいます。
-Obsidian（ローカルのメモアプリ）を外部記憶として使い、セッションをまたいで記憶を引き継げるようにする仕組みです。
-
-以下の手順を上から順番に実行してください。コマンドを実行する前に何をするか一言説明し、エラーが出たら止まって私に報告してください。
-
-## Step 1: Obsidianの確認とインストール
-
-1. /Applications/Obsidian.app が存在するか確認する
-2. なければ brew install --cask obsidian でインストールする
-3. Homebrewが入っていなければ、その旨を私に伝えて https://obsidian.md からの手動ダウンロードを案内する
-
-## Step 2: 記憶用フォルダ（Vault）の作成
-
-1. 以下のフォルダを作成する：
-
-~/Documents/Claude-Brain/
-├── daily/      （日次の作業ログ）
-├── todos/      （todoリスト）
-├── ideas/      （アイデア・構想）
-├── projects/   （プロジェクトの現在地）
-├── decisions/  （判断・ルールの記録）
-├── mistakes/   （ミス記録）
-└── sessions/   （セッション記録）
-
-2. ~/Documents/Claude-Brain/README.md を作成し、以下の内容を書き込む：
-
-- このVaultはAIの外部記憶として機能すること
-- 各フォルダの役割（上記の通り）
-- 更新ルール：
-  - セッション開始時：README + daily最新3件 + projectsを読む
-  - 記録タイミング：タスク完了・情報更新・テーマ切替・節目ごとに許可不要で即記録
-  - daily/への書き込みは追記（上書きしない）
-  - ミスが発生したらmistakes/に即座に記録
-  - 重要な判断をしたらdecisions/に記録
-
-## Step 3: MCPサーバーの接続
-
-1. 以下のコマンドを実行する（ユーザー全体で使えるように --scope user を付ける）：
-
-claude mcp add --scope user obsidian-brain npx -- -y @modelcontextprotocol/server-filesystem ~/Documents/Claude-Brain
-
-2. claude mcp list を実行して obsidian-brain: ✓ Connected が出ることを確認する
-
-※ 注意：settings.jsonに直接mcpServersを書く方法は反映されないことがあるので、必ず claude mcp add コマンドを使うこと。
-
-## Step 4: CLAUDE.mdにルールを追記
-
-~/.claude/CLAUDE.md （なければ作成）に、以下のセクションを追記する：
-
-## 外部記憶（Obsidian）ルール ⭐ 最重要
-
-### Vault場所
-~/Documents/Claude-Brain/
-
-### セッション開始時（必須）
-新しいセッションが始まったら、必ず最初に以下を読む：
-1. ~/Documents/Claude-Brain/README.md
-2. ~/Documents/Claude-Brain/daily/ の最新3件
-3. ~/Documents/Claude-Brain/projects/ の関連ファイル
-
-### 自動記録ルール（許可不要・常時）
-以下のタイミングで、ユーザーに確認せず即座にClaude-Brainに書き込む：
-
-| タイミング | 書き込み先 |
-|---|---|
-| 新しい情報・決定・方針が出た | daily/YYYY-MM-DD.md に追記 |
-| タスクが完了した | daily/YYYY-MM-DD.md に追記 |
-| 会話の節目（テーマが変わる時） | daily/YYYY-MM-DD.md に追記 |
-| ミスを指摘された | mistakes/YYYY-MM-DD-[内容].md |
-| 重要な判断をした | decisions/YYYY-MM-DD-[内容].md |
-| セッション終了時 | daily/YYYY-MM-DD.md に総まとめ |
-
-- 許可を取らない。書いたら返答の末尾に（📝 記録済み）と添えるだけでOK
-- daily/への書き込みは上書きでなく追記
-- 書きすぎを恐れない。抜け漏れより過剰記録の方がよい
-
-## Step 5: 完了報告
-
-すべて終わったら、以下を私に報告してください：
-
-1. 実行した内容のまとめ
-2. 私が手動でやること：
-   - Obsidianを起動 →「保管庫としてフォルダを開く」→ 書類/Claude-Brain を選択
-   - Claude Codeを再起動（MCP反映のため）
-3. 再起動後のテスト方法：新しいセッションで「Claude-Brainを確認して」と送る</pre></div>
-    </div>
-  </div>
-
-  <div class="tab-panel" id="panel-codex">
-    <div class="prompt-box">
-      <div class="prompt-head">
-        <div class="dots"><i></i><i></i><i></i></div>
-        <span class="fname">installer-codex.md</span>
-        <button class="copy-btn" data-copy="prompt-codex">コピーする</button>
-      </div>
-      <div class="prompt-scroll"><pre id="prompt-codex">あなたに「外部記憶システム」を導入してもらいます。
-Obsidian（ローカルのメモアプリ）を外部記憶として使い、セッションをまたいで記憶を引き継げるようにする仕組みです。
-
-以下の手順を上から順番に実行してください。コマンドを実行する前に何をするか一言説明し、エラーが出たら止まって私に報告してください。
-
-## Step 1: Obsidianの確認とインストール
-
-1. /Applications/Obsidian.app が存在するか確認する
-2. なければ brew install --cask obsidian でインストールする
-3. Homebrewが入っていなければ、その旨を私に伝えて https://obsidian.md からの手動ダウンロードを案内する
-
-## Step 2: 記憶用フォルダ（Vault）の作成
-
-1. 以下のフォルダを作成する：
-
-~/Documents/Claude-Brain/
-├── daily/      （日次の作業ログ）
-├── todos/      （todoリスト）
-├── ideas/      （アイデア・構想）
-├── projects/   （プロジェクトの現在地）
-├── decisions/  （判断・ルールの記録）
-├── mistakes/   （ミス記録）
-└── sessions/   （セッション記録）
-
-※ すでにClaude Code側で作成済みの場合はスキップしてOK（共有できるのがこの仕組みの強み）
-
-2. ~/Documents/Claude-Brain/README.md がなければ作成し、以下の内容を書き込む：
-
-- このVaultはAIの外部記憶として機能すること
-- 各フォルダの役割（上記の通り）
-- 更新ルール：
-  - セッション開始時：README + daily最新3件 + projectsを読む
-  - 記録タイミング：タスク完了・情報更新・テーマ切替・節目ごとに許可不要で即記録
-  - daily/への書き込みは追記（上書きしない）
-
-## Step 3: MCPサーバーの接続
-
-~/.codex/config.toml に以下のセクションを追記する（既存の設定は消さないこと）：
-
-[mcp_servers.obsidian-brain]
-command = "npx"
-args = ["-y", "@modelcontextprotocol/server-filesystem", "/Users/ユーザー名/Documents/Claude-Brain"]
-
-※ /Users/ユーザー名/ の部分は実際のホームディレクトリの絶対パスに置き換えること（echo $HOME で確認できる）。チルダ（~）は使わない。
-
-## Step 4: AGENTS.mdにルールを追記
-
-~/.codex/AGENTS.md （なければ作成）に、以下のセクションを追記する：
-
-## 外部記憶（Claude-Brain）ルール ⭐ 最重要
-
-Vault場所: ~/Documents/Claude-Brain/
-
-### セッション開始時（必須）
-新しいセッションが始まったら必ず以下を読む：
-1. ~/Documents/Claude-Brain/README.md
-2. ~/Documents/Claude-Brain/daily/ の最新3件
-3. ~/Documents/Claude-Brain/projects/ の関連ファイル
-
-### 自動記録ルール（許可不要・常時）
-以下のタイミングで、ユーザーに確認せず即座にClaude-Brainに書き込む：
-
-| タイミング | 書き込み先 |
-|---|---|
-| 新しい情報・決定・方針が出た | daily/YYYY-MM-DD.md に追記 |
-| タスクが完了した | daily/YYYY-MM-DD.md に追記 |
-| 会話の節目（テーマが変わる時） | daily/YYYY-MM-DD.md に追記 |
-| ミスを指摘された | mistakes/YYYY-MM-DD-[内容].md |
-| 重要な判断をした | decisions/YYYY-MM-DD-[内容].md |
-| セッション終了時 | daily/YYYY-MM-DD.md に総まとめ |
-
-- 許可を取らない。書いたら返答の末尾に（📝 記録済み）と添えるだけでOK
-- daily/への書き込みは上書きでなく追記
-
-## Step 5: 完了報告
-
-すべて終わったら、以下を私に報告してください：
-
-1. 実行した内容のまとめ
-2. 私が手動でやること：
-   - Obsidianを起動 →「保管庫としてフォルダを開く」→ 書類/Claude-Brain を選択（Claude Code側で設定済みならスキップ）
-   - Codexを再起動（MCP反映のため）
-3. 再起動後のテスト方法：新しいセッションで「Claude-Brainを確認して」と送る</pre></div>
-    </div>
-  </div>
-
-  <div class="note warn"><span class="ico">⚠️</span><span>AIがコマンド実行の許可を求めてきたら、<strong>内容を確認してから</strong>許可してください。このプロンプトでAIが触るのは「Obsidianのインストール」「Claude-Brainフォルダ」「AIの設定ファイル」の3つだけです。それ以外を触ろうとしたら止めてOK。</span></div>
-</section>
-
-<!-- 4 -->
-<section id="check">
-  <div class="sec-head"><div class="step-num">04</div><h2>動作確認 — 3ステップで完了</h2></div>
-  <div class="card">
-    <div class="flow">
-      <div class="flow-item">
-        <div class="flow-dot">1</div>
-        <div class="flow-body"><b>Obsidianを起動してVaultを開く</b><span>「保管庫としてフォルダを開く」→ 書類（Documents）→ Claude-Brain を選択。フォルダ一覧（daily, projects…）が左側に見えたらOK。</span></div>
-      </div>
-      <div class="flow-line"></div>
-      <div class="flow-item">
-        <div class="flow-dot">2</div>
-        <div class="flow-body"><b>AIツールを再起動する</b><span>Claude Code（またはCodex）を一度終了して開き直す。MCP接続はここで反映されます。</span></div>
-      </div>
-      <div class="flow-line"></div>
-      <div class="flow-item">
-        <div class="flow-dot">3</div>
-        <div class="flow-body"><b>新しいセッションでテスト</b><span>下のメッセージを送って、AIがVaultの中身を読んで報告してきたら成功！</span></div>
-      </div>
-    </div>
-    <div class="inline-cmd">
-      <code>Claude-Brainを確認して</code>
-      <button class="copy-btn" data-copy-text="Claude-Brainを確認して">コピー</button>
-    </div>
-  </div>
-  <div class="note ok"><span class="ico">✅</span><span>AIが「README.mdを確認しました。dailyフォルダはまだ空ですね」のように<strong>中身を読んで</strong>答えたら接続成功です。「そのようなファイルは見つかりません」と返ってきたらFAQへ。</span></div>
-</section>
-
-<!-- 5 -->
-<section id="usage">
-  <div class="sec-head"><div class="step-num">05</div><h2>使い方 — 育てるほど賢くなる</h2></div>
-  <div class="card">
-    <h3>🌱 基本の使い方</h3>
-    <ul>
-      <li><strong>セッション開始時</strong>：「昨日の続きやろう」「今の状況教えて」→ AIが勝手に記憶を読んで文脈を把握</li>
-      <li><strong>作業中</strong>：AIが節目ごとに勝手に記録（返答の末尾に「📝 記録済み」と出ます）</li>
-      <li><strong>覚えてほしいことがあったら</strong>：「これ記録しといて」と言えばOK</li>
-    </ul>
-  </div>
-  <div class="card">
-    <h3>🧠 賢く育てるコツ</h3>
-    <ul>
-      <li><strong>ミスは必ず指摘する</strong> → mistakes/に記録され、同じミスを繰り返さなくなる（一番効果が大きい）</li>
-      <li><strong>「それ違う、こうして」を遠慮しない</strong> → 好みやルールがdecisions/に蓄積していく</li>
-      <li><strong>Obsidianのグラフビューを見てみる</strong> → 記憶の繋がりが可視化されて楽しい（モチベ維持に効く）</li>
-      <li><strong>最初から完璧を目指さない</strong> → 使いながら「これも記録して」と足していくのが正解</li>
-    </ul>
-  </div>
-  <div class="note tip"><span class="ico">💡</span><span><strong>応用：</strong>Claude CodeとCodexの両方に導入すると、2つのAIが同じ記憶を共有します。ChatGPTやGeminiなどブラウザ型AIはローカルファイルに直接アクセスできないため、この仕組みの対象外です（必要ならMDファイルを手動でアップロードすれば読ませることは可能）。</span></div>
-</section>
-
-<!-- 6 -->
+<!-- security (shared, brief) -->
 <section id="security">
-  <div class="sec-head"><div class="step-num">06</div><h2>セキュリティの注意</h2></div>
+  <div class="sec-head"><div class="step-num">03</div><h2>導入前に知っておくこと</h2></div>
   <div class="card">
     <ul>
-      <li><strong>AIに渡す権限は最小限に</strong>：MCPで繋ぐのは Claude-Brain フォルダだけ。他のフォルダへのアクセス権は渡さない構成になっています。</li>
-      <li><strong>機密情報はVaultに書かない</strong>：パスワード・APIキー・クライアントの個人情報などは記録させないでください。「この情報は記録しないで」と言えば除外できます。</li>
-      <li><strong>AIの実行許可は内容を見てから</strong>：慣れてきても「全部許可」にはせず、何をしようとしているか確認する癖をつけましょう。</li>
-      <li><strong>自己責任の範囲を理解する</strong>：この仕組みはローカル環境の設定変更を含みます。不安な場合は導入前にバックアップ（Time Machine等）を取っておくと安心です。</li>
+      <li><strong>費用はかかりません</strong>：Obsidianは無料、MCP接続も無料です。AIツール自体の料金プランはそのままでOK。</li>
+      <li><strong>AIに渡す権限は最小限</strong>：AIと繋ぐのは記憶用フォルダ（Claude-Brain）だけです。</li>
+      <li><strong>機密情報はVaultに書かない</strong>：パスワード・APIキー・顧客の個人情報などは記録させないでください。</li>
+      <li><strong>導入は自己責任で</strong>：ローカル環境の設定変更を含みます。不安な場合はバックアップ（Time Machine等）を取ってから進めてください。</li>
     </ul>
   </div>
-</section>
-
-<!-- 7 -->
-<section id="faq">
-  <div class="sec-head"><div class="step-num">07</div><h2>トラブルシューティング</h2></div>
-
-  <details>
-    <summary>「Claude-Brainを確認して」と送っても読んでくれない</summary>
-    <div class="d-body">
-      <p>① AIツールを再起動したか確認（MCPは再起動後に反映されます）。<br>
-      ② Claude Codeの場合、ターミナルで <code>claude mcp list</code> を実行して <code>obsidian-brain: ✓ Connected</code> が出るか確認。出ない場合は導入プロンプトのStep 3をもう一度AIに実行してもらってください。<br>
-      ③ それでもダメなら「claude mcp listの結果を確認して、obsidian-brainが繋がっているか調べて」とAIに聞くのが早いです。</p>
-    </div>
-  </details>
-
-  <details>
-    <summary>Homebrewが入っていないと言われた</summary>
-    <div class="d-body">
-      <p><a href="https://obsidian.md" target="_blank" rel="noopener">obsidian.md</a> から手動でダウンロードしてインストールすればOKです。それ以外の手順は変わりません。AIに「Obsidianは手動で入れたから、Step 2から続けて」と伝えてください。</p>
-    </div>
-  </details>
-
-  <details>
-    <summary>Obsidianで「書類」フォルダが見つからない</summary>
-    <div class="d-body">
-      <p>Macの「書類」フォルダ＝英語名の「Documents」です。フォルダ選択画面の左側で自分のユーザー名（家のアイコン）→「書類」と進むと Claude-Brain があります。</p>
-    </div>
-  </details>
-
-  <details>
-    <summary>AIが自動で記録してくれない</summary>
-    <div class="d-body">
-      <p>ルールを読み込めていない可能性があります。「CLAUDE.mdの外部記憶ルールを確認して」と送ってみてください。それでも記録しない場合は「今の内容をClaude-Brainのdailyに記録して」と都度言えば確実に記録されます。使ううちに自動化の精度は上がっていきます。</p>
-    </div>
-  </details>
-
-  <details>
-    <summary>Codexでconfig.tomlの編集に失敗した</summary>
-    <div class="d-body">
-      <p>パスにチルダ（<code>~</code>）を使うと動かないことがあります。<code>/Users/あなたのユーザー名/Documents/Claude-Brain</code> のように絶対パスで書き直してください。ユーザー名はターミナルで <code>whoami</code> と打つと確認できます。</p>
-    </div>
-  </details>
-
-  <details>
-    <summary>記憶がごちゃごちゃしてきた</summary>
-    <div class="d-body">
-      <p>順調に育っている証拠です。「Claude-Brainの中身を整理して。古いdailyの要点をprojectsにまとめて」とAIに頼めば、AI自身に大掃除させることができます。月1回くらいがおすすめ。</p>
-    </div>
-  </details>
 </section>
 
 </main>
@@ -626,42 +116,5 @@ Vault場所: ~/Documents/Claude-Brain/
   </div>
 </footer>
 
-<div id="toast">コピーしました！</div>
-
-<script>
-// tabs
-document.querySelectorAll('.tab-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
-    btn.classList.add('active');
-    document.getElementById('panel-'+btn.dataset.tab).classList.add('active');
-  });
-});
-// copy
-function showToast(){
-  const t=document.getElementById('toast');
-  t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),1800);
-}
-document.querySelectorAll('.copy-btn').forEach(btn=>{
-  btn.addEventListener('click',async()=>{
-    const text = btn.dataset.copyText || document.getElementById(btn.dataset.copy).textContent;
-    try{
-      await navigator.clipboard.writeText(text);
-      const orig=btn.textContent;
-      btn.textContent='✓ コピー済み';btn.classList.add('done');
-      showToast();
-      setTimeout(()=>{btn.textContent=orig;btn.classList.remove('done')},2000);
-    }catch(e){
-      // fallback
-      const ta=document.createElement('textarea');
-      ta.value=text;document.body.appendChild(ta);ta.select();
-      document.execCommand('copy');document.body.removeChild(ta);
-      showToast();
-    }
-  });
-});
-</script>
 </body>
 </html>

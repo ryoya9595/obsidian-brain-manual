@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Codex版｜AI外部記憶システム 導入マニュアル</title>
+<meta name="description" content="CodexにObsidian外部記憶システムを導入する手順。コピペ一発、AIが自分でセットアップします。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body class="codex">
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="logo" href="./">🧠 AI外部記憶<span class="brain">システム</span></a>
+    <nav class="topnav">
+      <a href="./">← トップ</a>
+      <a href="#prep">準備</a>
+      <a href="#install">導入</a>
+      <a href="#check">動作確認</a>
+      <a href="#usage">使い方</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </div>
+</div>
+
+<header class="hero">
+  <div class="hero-badge accent">Codex 版マニュアル</div>
+  <h1>Codexに<br><span class="hl">外部記憶</span>を導入する</h1>
+  <p class="lead">導入プロンプトをCodexに貼るだけで、Obsidianのインストールから設定まで、Codex自身がセットアップしてくれます。</p>
+  <div class="meta">
+    <span class="chip accent">所要時間 約20分</span>
+    <span class="chip">費用 0円</span>
+    <span class="chip">対象 Mac</span>
+  </div>
+</header>
+
+<main>
+
+<!-- 1 -->
+<section id="prep">
+  <div class="sec-head"><div class="step-num">01</div><h2>事前準備</h2></div>
+  <div class="card">
+    <ul>
+      <li><strong>Mac</strong>（Windows版は現在準備中です）</li>
+      <li><strong>Codex（デスクトップアプリ）が使えること</strong></li>
+    </ul>
+    <p style="margin-top:14px">Obsidianのインストールは<strong>Codexが自分でやってくれる</strong>ので、事前に入れておく必要はありません。すでに入っていても問題ありません。</p>
+  </div>
+  <div class="note tip"><span class="ico">💡</span><span>Claude Code側ですでにこの仕組みを導入済みの人は、フォルダ作成がスキップされて<strong>同じ記憶を共有</strong>する形になります。安心してそのまま進めてください。</span></div>
+</section>
+
+<!-- 2 -->
+<section id="install">
+  <div class="sec-head"><div class="step-num">02</div><h2>導入 — プロンプトをコピペするだけ</h2></div>
+  <div class="card">
+    <p>下の「コピーする」を押して、<strong>そのままCodexに貼り付けて送信</strong>してください。あとはCodexが順番に作業してくれます。途中で実行の許可を求められたら、内容を見て許可してあげてください。</p>
+  </div>
+
+  <div class="prompt-box">
+    <div class="prompt-head">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <span class="fname">installer-codex.md</span>
+      <button class="copy-btn" data-copy="prompt-codex">コピーする</button>
+    </div>
+    <div class="prompt-scroll"><pre id="prompt-codex">あなたに「外部記憶システム」を導入してもらいます。
+Obsidian（ローカルのメモアプリ）を外部記憶として使い、セッションをまたいで記憶を引き継げるようにする仕組みです。
+
+以下の手順を上から順番に実行してください。コマンドを実行する前に何をするか一言説明し、エラーが出たら止まって私に報告してください。
+
+## Step 1: Obsidianの確認とインストール
+
+1. /Applications/Obsidian.app が存在するか確認する
+2. なければ brew install --cask obsidian でインストールする
+3. Homebrewが入っていなければ、その旨を私に伝えて https://obsidian.md からの手動ダウンロードを案内する
+
+## Step 2: 記憶用フォルダ（Vault）の作成
+
+1. 以下のフォルダを作成する：
+
+~/Documents/Claude-Brain/
+├── daily/      （日次の作業ログ）
+├── todos/      （todoリスト）
+├── ideas/      （アイデア・構想）
+├── projects/   （プロジェクトの現在地）
+├── decisions/  （判断・ルールの記録）
+├── mistakes/   （ミス記録）
+└── sessions/   （セッション記録）
+
+※ すでにClaude Code側で作成済みの場合はスキップしてOK（共有できるのがこの仕組みの強み）
+
+2. ~/Documents/Claude-Brain/README.md がなければ作成し、以下の内容を書き込む：
+
+- このVaultはAIの外部記憶として機能すること
+- 各フォルダの役割（上記の通り）
+- 更新ルール：
+  - セッション開始時：README + daily最新3件 + projectsを読む
+  - 記録タイミング：タスク完了・情報更新・テーマ切替・節目ごとに許可不要で即記録
+  - daily/への書き込みは追記（上書きしない）
+
+## Step 3: MCPサーバーの接続
+
+~/.codex/config.toml に以下のセクションを追記する（既存の設定は消さないこと）：
+
+[mcp_servers.obsidian-brain]
+command = "npx"
+args = ["-y", "@modelcontextprotocol/server-filesystem", "/Users/ユーザー名/Documents/Claude-Brain"]
+
+※ /Users/ユーザー名/ の部分は実際のホームディレクトリの絶対パスに置き換えること（echo $HOME で確認できる）。チルダ（~）は使わない。
+
+## Step 4: AGENTS.mdにルールを追記
+
+~/.codex/AGENTS.md （なければ作成）に、以下のセクションを追記する：
+
+## 外部記憶（Claude-Brain）ルール ⭐ 最重要
+
+Vault場所: ~/Documents/Claude-Brain/
+
+### セッション開始時（必須）
+新しいセッションが始まったら必ず以下を読む：
+1. ~/Documents/Claude-Brain/README.md
+2. ~/Documents/Claude-Brain/daily/ の最新3件
+3. ~/Documents/Claude-Brain/projects/ の関連ファイル
+
+### 自動記録ルール（許可不要・常時）
+以下のタイミングで、ユーザーに確認せず即座にClaude-Brainに書き込む：
+
+| タイミング | 書き込み先 |
+|---|---|
+| 新しい情報・決定・方針が出た | daily/YYYY-MM-DD.md に追記 |
+| タスクが完了した | daily/YYYY-MM-DD.md に追記 |
+| 会話の節目（テーマが変わる時） | daily/YYYY-MM-DD.md に追記 |
+| ミスを指摘された | mistakes/YYYY-MM-DD-[内容].md |
+| 重要な判断をした | decisions/YYYY-MM-DD-[内容].md |
+| セッション終了時 | daily/YYYY-MM-DD.md に総まとめ |
+
+- 許可を取らない。書いたら返答の末尾に（📝 記録済み）と添えるだけでOK
+- daily/への書き込みは上書きでなく追記
+
+## Step 5: 完了報告
+
+すべて終わったら、以下を私に報告してください：
+
+1. 実行した内容のまとめ
+2. 私が手動でやること：
+   - Obsidianを起動 →「保管庫としてフォルダを開く」→ 書類/Claude-Brain を選択（Claude Code側で設定済みならスキップ）
+   - Codexを再起動（MCP反映のため）
+3. 再起動後のテスト方法：新しいセッションで「Claude-Brainを確認して」と送る</pre></div>
+  </div>
+
+  <div class="note warn"><span class="ico">⚠️</span><span>Codexがコマンド実行の許可を求めてきたら、<strong>内容を確認してから</strong>許可してください。このプロンプトで触るのは「Obsidianのインストール」「Claude-Brainフォルダ」「Codexの設定ファイル」の3つだけです。それ以外を触ろうとしたら止めてOK。</span></div>
+</section>
+
+<!-- 3 -->
+<section id="check">
+  <div class="sec-head"><div class="step-num">03</div><h2>動作確認 — 3ステップで完了</h2></div>
+  <div class="card">
+    <div class="flow">
+      <div class="flow-item">
+        <div class="flow-dot">1</div>
+        <div class="flow-body"><b>Obsidianを起動してVaultを開く</b><span>「保管庫としてフォルダを開く」→ 書類（Documents）→ Claude-Brain を選択。Claude Code側で設定済みの人はスキップ。</span></div>
+      </div>
+      <div class="flow-line"></div>
+      <div class="flow-item">
+        <div class="flow-dot">2</div>
+        <div class="flow-body"><b>Codexを再起動する</b><span>一度終了して開き直す。MCP接続はここで反映されます。</span></div>
+      </div>
+      <div class="flow-line"></div>
+      <div class="flow-item">
+        <div class="flow-dot">3</div>
+        <div class="flow-body"><b>新しいセッションでテスト</b><span>下のメッセージを送って、CodexがVaultの中身を読んで報告してきたら成功！</span></div>
+      </div>
+    </div>
+    <div class="inline-cmd">
+      <code>Claude-Brainを確認して</code>
+      <button class="copy-btn" data-copy-text="Claude-Brainを確認して">コピー</button>
+    </div>
+  </div>
+  <div class="note ok"><span class="ico">✅</span><span>「README.mdを確認しました。dailyフォルダはまだ空ですね」のように<strong>中身を読んで</strong>答えたら接続成功です。「そのようなファイルは見つかりません」と返ってきたらFAQへ。</span></div>
+</section>
+
+<!-- 4 -->
+<section id="usage">
+  <div class="sec-head"><div class="step-num">04</div><h2>使い方 — 育てるほど賢くなる</h2></div>
+  <div class="card">
+    <h3>🌱 基本の使い方</h3>
+    <ul>
+      <li><strong>セッション開始時</strong>：「昨日の続きやろう」「今の状況教えて」→ Codexが勝手に記憶を読んで文脈を把握</li>
+      <li><strong>作業中</strong>：節目ごとに勝手に記録（返答の末尾に「📝 記録済み」と出ます）</li>
+      <li><strong>覚えてほしいことがあったら</strong>：「これ記録しといて」と言えばOK</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h3>🧠 賢く育てるコツ</h3>
+    <ul>
+      <li><strong>ミスは必ず指摘する</strong> → mistakes/に記録され、同じミスを繰り返さなくなる（一番効果が大きい）</li>
+      <li><strong>「それ違う、こうして」を遠慮しない</strong> → 好みやルールがdecisions/に蓄積していく</li>
+      <li><strong>Obsidianのグラフビューを見てみる</strong> → 記憶の繋がりが可視化されて楽しい（モチベ維持に効く）</li>
+      <li><strong>最初から完璧を目指さない</strong> → 使いながら「これも記録して」と足していくのが正解</li>
+    </ul>
+  </div>
+  <div class="note tip"><span class="ico">💡</span><span><strong>応用：</strong>Claude Codeも使っているなら、<a href="claude-code.html">Claude Code版マニュアル</a>の手順も実行すると2つのAIが同じ記憶を共有します。ChatGPTやGeminiなどブラウザ型AIはローカルファイルに直接アクセスできないため対象外です。</span></div>
+</section>
+
+<!-- 5 -->
+<section id="faq">
+  <div class="sec-head"><div class="step-num">05</div><h2>トラブルシューティング</h2></div>
+
+  <details>
+    <summary>「Claude-Brainを確認して」と送っても読んでくれない</summary>
+    <div class="d-body">
+      <p>① Codexを再起動したか確認（MCPは再起動後に反映されます）。<br>
+      ② 「~/.codex/config.toml に mcp_servers.obsidian-brain の設定が正しく入っているか確認して」とCodexに聞いてみてください。<br>
+      ③ パスにチルダ（<code>~</code>）が使われていると動かないことがあります。絶対パスになっているか確認を。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>config.tomlの編集に失敗した・Codexが起動しなくなった</summary>
+    <div class="d-body">
+      <p>config.tomlの文法エラーの可能性があります。パスは <code>/Users/あなたのユーザー名/Documents/Claude-Brain</code> のように絶対パスで、ダブルクォートで囲んで書いてください。ユーザー名はターミナルで <code>whoami</code> と打つと確認できます。直しても起動しない場合は、追記したセクションを一度削除して最初からやり直すのが確実です。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Homebrewが入っていないと言われた</summary>
+    <div class="d-body">
+      <p><a href="https://obsidian.md" target="_blank" rel="noopener">obsidian.md</a> から手動でダウンロードしてインストールすればOKです。それ以外の手順は変わりません。「Obsidianは手動で入れたから、Step 2から続けて」と伝えてください。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Obsidianで「書類」フォルダが見つからない</summary>
+    <div class="d-body">
+      <p>Macの「書類」フォルダ＝英語名の「Documents」です。フォルダ選択画面の左側で自分のユーザー名（家のアイコン）→「書類」と進むと Claude-Brain があります。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>自動で記録してくれない</summary>
+    <div class="d-body">
+      <p>ルールを読み込めていない可能性があります。「AGENTS.mdの外部記憶ルールを確認して」と送ってみてください。それでも記録しない場合は「今の内容をClaude-Brainのdailyに記録して」と都度言えば確実に記録されます。使ううちに自動化の精度は上がっていきます。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>記憶がごちゃごちゃしてきた</summary>
+    <div class="d-body">
+      <p>順調に育っている証拠です。「Claude-Brainの中身を整理して。古いdailyの要点をprojectsにまとめて」と頼めば、AI自身に大掃除させることができます。月1回くらいがおすすめ。</p>
+    </div>
+  </details>
+
+  <div class="pager">
+    <a href="./">← トップに戻る</a>
+    <a href="claude-code.html">Claude Code版マニュアルへ →</a>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="footer-in">
+    <span>🧠 AI外部記憶システム 導入マニュアル — Codex版</span>
+    <span>導入は自己責任でお願いします</span>
+  </div>
+</footer>
+
+<div id="toast">コピーしました！</div>
+
+<script>
+function showToast(){
+  const t=document.getElementById('toast');
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),1800);
+}
+document.querySelectorAll('.copy-btn').forEach(btn=>{
+  btn.addEventListener('click',async()=>{
+    const text = btn.dataset.copyText || document.getElementById(btn.dataset.copy).textContent;
+    try{
+      await navigator.clipboard.writeText(text);
+      const orig=btn.textContent;
+      btn.textContent='✓ コピー済み';btn.classList.add('done');
+      showToast();
+      setTimeout(()=>{btn.textContent=orig;btn.classList.remove('done')},2000);
+    }catch(e){
+      const ta=document.createElement('textarea');
+      ta.value=text;document.body.appendChild(ta);ta.select();
+      document.execCommand('copy');document.body.removeChild(ta);
+      showToast();
+    }
+  });
+});
+</script>
+</body>
+</html>

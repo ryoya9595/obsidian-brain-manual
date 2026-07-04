@@ -140,6 +140,35 @@ section{margin-top:64px}
 .tool-card.cc .t-stripe{background:#5d4fd3}
 .tool-card.cx .t-stripe{background:#0e8a72}
 
+/* OS switch banner */
+.os-switch{
+  display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+  background:#fff;border:2px dashed var(--accent);border-radius:16px;
+  padding:18px 24px;margin:28px 0 0;
+}
+.os-switch .os-ico{font-size:1.6rem;flex-shrink:0}
+.os-switch p{font-size:.92rem;color:var(--ink-soft);flex-grow:1;margin:0}
+.os-switch p strong{color:var(--ink)}
+.os-switch a{
+  flex-shrink:0;
+  font-family:'Zen Maru Gothic',sans-serif;font-weight:700;font-size:.9rem;
+  background:var(--accent);color:#fff;text-decoration:none;
+  padding:10px 22px;border-radius:999px;transition:all .15s;
+}
+.os-switch a:hover{background:var(--accent-deep);transform:translateY(-1px)}
+
+/* tool card OS buttons */
+.t-os{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.t-os a{
+  text-decoration:none;font-weight:700;font-size:.85rem;
+  font-family:'Zen Maru Gothic',sans-serif;
+  padding:9px 18px;border-radius:999px;transition:all .15s;
+}
+.tool-card.cc .t-os a{background:#eceafb;color:#463aa8}
+.tool-card.cc .t-os a:hover{background:#5d4fd3;color:#fff}
+.tool-card.cx .t-os a{background:#e2f3ee;color:#0a6b58}
+.tool-card.cx .t-os a:hover{background:#0e8a72;color:#fff}
+
 /* flow diagram */
 .flow{display:flex;flex-direction:column;gap:0;margin:18px 0 6px}
 .flow-item{display:flex;gap:14px;align-items:flex-start}

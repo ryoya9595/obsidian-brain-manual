@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claude Code版｜AI外部記憶システム 導入マニュアル</title>
-<meta name="description" content="Claude CodeにObsidian外部記憶システムを導入する手順。コピペ一発、AIが自分でセットアップします。">
+<title>Claude Code版（Windows）｜AI外部記憶システム 導入マニュアル</title>
+<meta name="description" content="WindowsのClaude CodeにObsidian外部記憶システムを導入する手順。コピペ一発、AIが自分でセットアップします。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@500;700;900&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -27,18 +27,18 @@
 </div>
 
 <header class="hero">
-  <div class="hero-badge accent">Claude Code 版マニュアル</div>
+  <div class="hero-badge accent">Claude Code 版マニュアル（Windows）</div>
   <h1>Claude Codeに<br><span class="hl">外部記憶</span>を導入する</h1>
   <p class="lead">導入プロンプトをClaude Codeに貼るだけで、Obsidianのインストールから設定まで、Claude Code自身がセットアップしてくれます。</p>
   <div class="meta">
     <span class="chip accent">所要時間 約20分</span>
     <span class="chip">費用 0円</span>
-    <span class="chip">🍎 このページは Mac 用</span>
+    <span class="chip">🪟 このページは Windows 用</span>
   </div>
   <div class="os-switch">
-    <span class="os-ico">🪟</span>
-    <p><strong>Windowsをお使いの方へ</strong>：このページはMac用です。Windows専用の手順ページをご用意しています。</p>
-    <a href="claude-code-windows.html">Windows版マニュアルへ →</a>
+    <span class="os-ico">🍎</span>
+    <p><strong>Macをお使いの方へ</strong>：このページはWindows用です。Mac専用の手順ページはこちら。</p>
+    <a href="claude-code.html">Mac版マニュアルへ →</a>
   </div>
 </header>
 
@@ -49,7 +49,7 @@
   <div class="sec-head"><div class="step-num">01</div><h2>事前準備</h2></div>
   <div class="card">
     <ul>
-      <li><strong>Mac</strong>（Windowsの方は<a href="claude-code-windows.html">Windows版マニュアル</a>へ）</li>
+      <li><strong>Windows 10 / 11</strong></li>
       <li><strong>Claude Codeが使えること</strong>（デスクトップアプリのCodeモード、またはターミナルのCLI版どちらでもOK）</li>
     </ul>
     <p style="margin-top:14px">Obsidianのインストールは<strong>Claude Codeが自分でやってくれる</strong>ので、事前に入れておく必要はありません。すでに入っていても問題ありません。</p>
@@ -66,25 +66,30 @@
   <div class="prompt-box">
     <div class="prompt-head">
       <div class="dots"><i></i><i></i><i></i></div>
-      <span class="fname">installer-claude-code.md</span>
-      <button class="copy-btn" data-copy="prompt-claude">コピーする</button>
+      <span class="fname">installer-claude-code-windows.md</span>
+      <button class="copy-btn" data-copy="prompt-claude-win">コピーする</button>
     </div>
-    <div class="prompt-scroll"><pre id="prompt-claude">あなたに「外部記憶システム」を導入してもらいます。
+    <div class="prompt-scroll"><pre id="prompt-claude-win">あなたに「外部記憶システム」を導入してもらいます。
 Obsidian（ローカルのメモアプリ）を外部記憶として使い、セッションをまたいで記憶を引き継げるようにする仕組みです。
 
-以下の手順を上から順番に実行してください。コマンドを実行する前に何をするか一言説明し、エラーが出たら止まって私に報告してください。
+環境はWindowsです。以下の手順を上から順番に実行してください。コマンドを実行する前に何をするか一言説明し、エラーが出たら止まって私に報告してください。
 
 ## Step 1: Obsidianの確認とインストール
 
-1. /Applications/Obsidian.app が存在するか確認する
-2. なければ brew install --cask obsidian でインストールする
-3. Homebrewが入っていなければ、その旨を私に伝えて https://obsidian.md からの手動ダウンロードを案内する
+1. Obsidianがインストール済みか確認する
+2. なければ winget install -e --id Obsidian.Obsidian でインストールする
+3. wingetが使えなければ、その旨を私に伝えて https://obsidian.md からの手動ダウンロードを案内する
 
 ## Step 2: 記憶用フォルダ（Vault）の作成
 
-1. 以下のフォルダを作成する：
+1. まず実際の「ドキュメント」フォルダの場所を確認する。
+   OneDriveでドキュメントフォルダが移動されている場合があるため、PowerShellで以下を実行して正確なパスを取得すること：
 
-~/Documents/Claude-Brain/
+   [Environment]::GetFolderPath('MyDocuments')
+
+2. 取得したドキュメントフォルダの直下に、以下のフォルダを作成する：
+
+Claude-Brain/
 ├── daily/      （日次の作業ログ）
 ├── todos/      （todoリスト）
 ├── ideas/      （アイデア・構想）
@@ -93,7 +98,7 @@ Obsidian（ローカルのメモアプリ）を外部記憶として使い、セ
 ├── mistakes/   （ミス記録）
 └── sessions/   （セッション記録）
 
-2. ~/Documents/Claude-Brain/README.md を作成し、以下の内容を書き込む：
+3. Claude-Brain/README.md を作成し、以下の内容を書き込む：
 
 - このVaultはAIの外部記憶として機能すること
 - 各フォルダの役割（上記の通り）
@@ -106,28 +111,28 @@ Obsidian（ローカルのメモアプリ）を外部記憶として使い、セ
 
 ## Step 3: MCPサーバーの接続
 
-1. 以下のコマンドを実行する（ユーザー全体で使えるように --scope user を付ける）：
+1. 以下のコマンドを実行する。「ドキュメントパス」はStep 2で取得した実際のパスに置き換えること：
 
-claude mcp add --scope user obsidian-brain npx -- -y @modelcontextprotocol/server-filesystem ~/Documents/Claude-Brain
+claude mcp add --scope user obsidian-brain -- cmd /c npx -y @modelcontextprotocol/server-filesystem "ドキュメントパス\Claude-Brain"
+
+※ Windowsではnpxを直接指定するとMCPサーバーの起動に失敗することがあるため、必ず cmd /c を挟むこと。
 
 2. claude mcp list を実行して obsidian-brain: ✓ Connected が出ることを確認する
 
-※ 注意：settings.jsonに直接mcpServersを書く方法は反映されないことがあるので、必ず claude mcp add コマンドを使うこと。
-
 ## Step 4: CLAUDE.mdにルールを追記
 
-~/.claude/CLAUDE.md （なければ作成）に、以下のセクションを追記する：
+%USERPROFILE%\.claude\CLAUDE.md （なければ作成）に、以下のセクションを追記する。「ドキュメントパス」は実際のパスに置き換えること：
 
 ## 外部記憶（Obsidian）ルール ⭐ 最重要
 
 ### Vault場所
-~/Documents/Claude-Brain/
+ドキュメントパス\Claude-Brain\
 
 ### セッション開始時（必須）
 新しいセッションが始まったら、必ず最初に以下を読む：
-1. ~/Documents/Claude-Brain/README.md
-2. ~/Documents/Claude-Brain/daily/ の最新3件
-3. ~/Documents/Claude-Brain/projects/ の関連ファイル
+1. Claude-Brain\README.md
+2. Claude-Brain\daily\ の最新3件
+3. Claude-Brain\projects\ の関連ファイル
 
 ### 自動記録ルール（許可不要・常時）
 以下のタイミングで、ユーザーに確認せず即座にClaude-Brainに書き込む：
@@ -149,9 +154,9 @@ claude mcp add --scope user obsidian-brain npx -- -y @modelcontextprotocol/serve
 
 すべて終わったら、以下を私に報告してください：
 
-1. 実行した内容のまとめ
+1. 実行した内容のまとめ（Claude-Brainの実際のパスも明記）
 2. 私が手動でやること：
-   - Obsidianを起動 →「保管庫としてフォルダを開く」→ 書類/Claude-Brain を選択
+   - Obsidianを起動 →「保管庫としてフォルダを開く」→ ドキュメント内の Claude-Brain を選択
    - Claude Codeを再起動（MCP反映のため）
 3. 再起動後のテスト方法：新しいセッションで「Claude-Brainを確認して」と送る</pre></div>
   </div>
@@ -166,7 +171,7 @@ claude mcp add --scope user obsidian-brain npx -- -y @modelcontextprotocol/serve
     <div class="flow">
       <div class="flow-item">
         <div class="flow-dot">1</div>
-        <div class="flow-body"><b>Obsidianを起動してVaultを開く</b><span>「保管庫としてフォルダを開く」→ 書類（Documents）→ Claude-Brain を選択。フォルダ一覧（daily, projects…）が左側に見えたらOK。</span></div>
+        <div class="flow-body"><b>Obsidianを起動してVaultを開く</b><span>「保管庫としてフォルダを開く」→ ドキュメント → Claude-Brain を選択。フォルダ一覧（daily, projects…）が左側に見えたらOK。</span></div>
       </div>
       <div class="flow-line"></div>
       <div class="flow-item">
@@ -207,7 +212,7 @@ claude mcp add --scope user obsidian-brain npx -- -y @modelcontextprotocol/serve
       <li><strong>最初から完璧を目指さない</strong> → 使いながら「これも記録して」と足していくのが正解</li>
     </ul>
   </div>
-  <div class="note tip"><span class="ico">💡</span><span><strong>応用：</strong>Codexも使っているなら、<a href="codex.html">Codex版マニュアル</a>の手順も実行すると2つのAIが同じ記憶を共有します。ChatGPTやGeminiなどブラウザ型AIはローカルファイルに直接アクセスできないため対象外です。</span></div>
+  <div class="note tip"><span class="ico">💡</span><span><strong>応用：</strong>Codexも使っているなら、<a href="codex-windows.html">Codex版マニュアル（Windows）</a>の手順も実行すると2つのAIが同じ記憶を共有します。ChatGPTやGeminiなどブラウザ型AIはローカルファイルに直接アクセスできないため対象外です。</span></div>
 </section>
 
 <!-- 5 -->
@@ -219,21 +224,28 @@ claude mcp add --scope user obsidian-brain npx -- -y @modelcontextprotocol/serve
     <div class="d-body">
       <p>① Claude Codeを再起動したか確認（MCPは再起動後に反映されます）。<br>
       ② ターミナルで <code>claude mcp list</code> を実行して <code>obsidian-brain: ✓ Connected</code> が出るか確認。出ない場合は導入プロンプトのStep 3をもう一度実行してもらってください。<br>
-      ③ それでもダメなら「claude mcp listの結果を確認して、obsidian-brainが繋がっているか調べて」とClaude Codeに聞くのが早いです。</p>
+      ③ Windowsでは <code>cmd /c</code> を挟まないとMCPサーバーが起動しないことがあります。「claude mcp listの結果を確認して、obsidian-brainの設定にcmd /cが入っているか調べて」とClaude Codeに聞いてみてください。</p>
     </div>
   </details>
 
   <details>
-    <summary>Homebrewが入っていないと言われた</summary>
+    <summary>Claude-Brainフォルダが見つからない・変な場所にできた</summary>
+    <div class="d-body">
+      <p>OneDriveを使っていると「ドキュメント」フォルダが <code>C:\Users\名前\OneDrive\ドキュメント</code> に移動されていることがあります。「PowerShellで [Environment]::GetFolderPath('MyDocuments') を実行して、Claude-Brainがそこにあるか確認して」とClaude Codeに頼んでください。MCPの設定パスと実際の場所がズレていると接続できません。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>wingetが使えないと言われた</summary>
     <div class="d-body">
       <p><a href="https://obsidian.md" target="_blank" rel="noopener">obsidian.md</a> から手動でダウンロードしてインストールすればOKです。それ以外の手順は変わりません。「Obsidianは手動で入れたから、Step 2から続けて」と伝えてください。</p>
     </div>
   </details>
 
   <details>
-    <summary>Obsidianで「書類」フォルダが見つからない</summary>
+    <summary>npxが見つからないと言われた</summary>
     <div class="d-body">
-      <p>Macの「書類」フォルダ＝英語名の「Documents」です。フォルダ選択画面の左側で自分のユーザー名（家のアイコン）→「書類」と進むと Claude-Brain があります。</p>
+      <p>Node.jsが入っていない可能性があります。<a href="https://nodejs.org/ja" target="_blank" rel="noopener">nodejs.org</a> からLTS版をインストールしてから、Step 3をやり直してください。「Node.jsを入れたから、Step 3からやり直して」と伝えればOKです。</p>
     </div>
   </details>
 
@@ -253,7 +265,7 @@ claude mcp add --scope user obsidian-brain npx -- -y @modelcontextprotocol/serve
 
   <div class="pager">
     <a href="./">← トップに戻る</a>
-    <a href="codex.html">Codex版マニュアルへ →</a>
+    <a href="codex-windows.html">Codex版（Windows）へ →</a>
   </div>
 </section>
 
@@ -261,7 +273,7 @@ claude mcp add --scope user obsidian-brain npx -- -y @modelcontextprotocol/serve
 
 <footer>
   <div class="footer-in">
-    <span>🧠 AI外部記憶システム 導入マニュアル — Claude Code版</span>
+    <span>🧠 AI外部記憶システム 導入マニュアル — Claude Code版（Windows）</span>
     <span>導入は自己責任でお願いします</span>
   </div>
 </footer>

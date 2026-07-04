@@ -176,16 +176,21 @@ section{margin-top:64px}
 .os-switch a:hover{background:var(--accent-deep);transform:translateY(-1px)}
 
 /* tool card OS buttons */
-.t-os{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.t-os{display:flex;flex-direction:column;gap:12px;margin-top:20px}
 .t-os a{
-  text-decoration:none;font-weight:700;font-size:.85rem;
+  display:flex;align-items:center;justify-content:space-between;
+  text-decoration:none;font-weight:700;font-size:.95rem;
   font-family:'Zen Maru Gothic',sans-serif;
-  padding:9px 18px;border-radius:999px;transition:all .15s;
+  padding:16px 22px;border-radius:14px;transition:all .15s;
+  color:#fff;box-shadow:0 3px 0 rgba(38,32,58,.18);
 }
-.tool-card.cc .t-os a{background:#eceafb;color:#463aa8}
-.tool-card.cc .t-os a:hover{background:#5d4fd3;color:#fff}
-.tool-card.cx .t-os a{background:#e2f3ee;color:#0a6b58}
-.tool-card.cx .t-os a:hover{background:#0e8a72;color:#fff}
+.t-os a::after{content:"→";font-size:1.1rem;opacity:.85}
+.t-os a:hover{transform:translateY(-2px);box-shadow:0 6px 14px rgba(38,32,58,.22)}
+.t-os a:active{transform:translateY(1px);box-shadow:0 1px 0 rgba(38,32,58,.18)}
+.tool-card.cc .t-os a{background:#5d4fd3}
+.tool-card.cc .t-os a:hover{background:#463aa8}
+.tool-card.cx .t-os a{background:#0e8a72}
+.tool-card.cx .t-os a:hover{background:#0a6b58}
 
 /* flow diagram */
 .flow{display:flex;flex-direction:column;gap:0;margin:18px 0 6px}
